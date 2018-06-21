@@ -145,6 +145,11 @@ void exibir(tlista *lista){
 
 }
 
+void exibirMaisNovo(tlista *lista){
+	printf("Nome: %s\n", lista->ini->nome);
+	printf("Idade: %s\n", lista->ini->idade);
+}
+
 int main(){
 
 	tlista lista;
@@ -188,7 +193,7 @@ int main(){
 				excluir_30(&lista);
 			break;
 			case 5:
-
+				exibirMaisNovo(&lista);
 			break;
 			case 6:
 				exibir(&lista);
