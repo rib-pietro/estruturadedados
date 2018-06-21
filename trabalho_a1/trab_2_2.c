@@ -90,9 +90,25 @@ int qntdMenores(tlista *lista, int funcao){
 	return qntd;
 }
 
-void excluir_30(tlista *lista){
+int buscar30(tlista *lista){
 
-	// printf("%p\n", lista);
+	taluno *aux;
+	int qntd = 0;
+
+	aux = lista->ini;
+
+	while(aux != NULL){
+		if(aux->idade == 30){
+			qntd++;
+		}
+		aux = aux->prox;
+	}
+
+	return qntd;
+
+}
+
+void excluir_30(tlista *lista){
 
 	taluno *aux, *aux2;
 
@@ -103,7 +119,6 @@ void excluir_30(tlista *lista){
 		if(lista->ini->idade == 30){
 			lista->ini = lista->ini->prox;
 			free(aux);
-			// excluir_30(lista);
 		} else {
 			if(lista->fim->idade == 30){
 				while(aux->prox->prox != NULL){
@@ -113,14 +128,15 @@ void excluir_30(tlista *lista){
 				aux->prox = aux2->prox;
 				lista->fim = aux;
 				free(aux2);
-				// excluir_30(lista);
 			} else {
 				while(aux != NULL){
 					if(aux->prox->idade == 30){
 						aux2 = aux->prox;
 						aux->prox = aux2->prox;
 						free(aux2);
+						break;
 					}
+					aux = aux->prox;
 				}
 			}
 		}
@@ -153,7 +169,7 @@ void exibirMaisNovo(tlista *lista){
 int main(){
 
 	tlista lista;
-	int opt, idade = 0, qntd;
+	int opt, idade = 0, qntd, qntd30, excluido, i;
 	char nome[30];
 
 	inicializar(&lista);
@@ -189,8 +205,10 @@ int main(){
 				qntdMenores(&lista, 3);
 			break;
 			case 4:
-				// printf("%p\n", &lista);
-				excluir_30(&lista);
+				qntd30 = buscar30(&lista);
+				for(i = 0; i < qntd30; i++){
+					excluir_30(&lista);
+				}
 			break;
 			case 5:
 				exibirMaisNovo(&lista);

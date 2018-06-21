@@ -35,40 +35,47 @@ void inicilizar(tagenda *agenda){
 
 void cadastrar(tagenda *agenda){
 
-	tpessoa *nova_p;
+	tpessoa *nova_p, *aux;
+	char nome[50], telefone[11];
+
+	printf("Informe o nome: \n");
+	scanf("%s", nome);
+	printf("Informe o telefone\n");
+	scanf("%s", telefone);
 
 	nova_p = (tpessoa*)malloc(sizeof(tpessoa));
 	nova_p->prox = NULL;
 	nova_p->ant = NULL;
 	strcpy(nova_p->nome, nome);
-	if(lista->ini == NULL){
-		lista->ini = nova_p;
-		lista->fim = nova_p;
+	strcpy(nova_p->telefone, telefone);
+	if(agenda->ini == NULL){
+		agenda->ini = nova_p;
+		agenda->fim = nova_p;
 	} else {
-		aux = lista->ini;
-		// printf("nome: %d\n", nome[0]);
-		if(nova_p->nome[0] < lista->ini->nome[0]){
-			nova_p->prox = lista->ini;
-			lista->ini = nova_p;
+		aux = agenda->ini;
+		if(nova_p->nome[0] < agenda->ini->nome[0]){
+			nova_p->prox = agenda->ini;
+			agenda->ini = nova_p;
 		} else {
-			if(nova_p->nome[0] > lista->fim->nome[0]){
-				nova_p->ant = lista->fim;
+			if(nova_p->nome[0] > agenda->fim->nome[0]){
+				nova_p->ant = agenda->fim;
 				nova_p->prox = NULL;
-				lista->fim->prox = nova_p;
-				lista->fim = nova_p;
+				agenda->fim->prox = nova_p;
+				agenda->fim = nova_p;
 			}
 			else {
 				while(nova_p->nome[0] > aux->nome[0]){
 					aux = aux->prox;
 				}
-				nova_p->ant = aux->ant
-				nova_p->prox = aux;
+				printf("%c\n", aux->nome[0]);
+				nova_p->ant = aux->ant;
 				aux->ant->prox = nova_p;
+				nova_p->prox = aux;
 			}
 		}
 	}
 
-	lista->qntd+=1;
+	agenda->qntd+=1;
 
 }
 
@@ -134,7 +141,7 @@ void excluir(tagenda *agenda){
 	}
 }
 
-void pesquisaPessoa(tagenda *agenda){
+void pesquisaTelefone(tagenda *agenda){
 
 	char nome[50];
 	tpessoa *aux;
@@ -183,9 +190,9 @@ void main(){
 	inicilizar(&agenda);
 	do{
 		printf("1 - Cadastrar pessoa\n");
-		printf("2 - Alterar preco\n");
+		printf("2 - Alterar telefone\n");
 		printf("3 - Excluir\n");
-		printf("4 - Pesquisar preco\n");
+		printf("4 - Consultar telefone\n");
 		printf("5 - Exibir\n");
 		printf("0 - Sair\n");
 		scanf("%d", &opt);
@@ -200,7 +207,7 @@ void main(){
 				excluir(&agenda);
 			break;
 			case 4:
-				pesquisaPessoa(&agenda);
+				pesquisaTelefone(&agenda);
 			break;
 			case 5:
 				exibir(&agenda);
