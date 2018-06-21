@@ -130,22 +130,6 @@ int main(){
 						break;
 					}
 				}
-				
-				// while(1){
-				// 	printf("Informe a palavra digitada\n");
-				// 	scanf("%s", palavra);
-				// 	// printf("Palavra: %c\n", palavra[0]);
-				// 	if(strcmp(palavra, 'xyz') != 0){
-				// 		if(buscarPalavra(&lista, palavra)){
-				// 			printf("Esta palavra ja esta cadastrada\n");
-				// 		} else {
-				// 			// printf("ME chama de meu nego\n");
-							
-				// 		}
-				// 	} else {
-				// 		break;
-				// 	}
-				// }
 			break;
 			case 2:
 				exibir(&lista);
