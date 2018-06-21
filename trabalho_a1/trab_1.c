@@ -89,7 +89,7 @@ void ordemAlfab(agenda *lista){
 		for(i = 0; i < lista->quantidade - 1; i++){
 			menor = i;
 			for(j = i+1; j < lista->quantidade; j++){
-				printf("%c\n", lista->lista[j].nome[0]);
+				
 				if(lista->lista[j].nome[0] < lista->lista[menor].nome[0]){
 					menor = j;
 				}
@@ -110,7 +110,11 @@ void ordemAlfab(agenda *lista){
 
 void pesquisaPessoa(agenda *lista){
 
+	int esq, dir, pos = -1, meio;
 	char nome[50];
+
+	esq = 0;
+	dir = lista->quantidade - 1;
 
 	if(lista->quantidade == 0){
 		printf("A lista esta vazia!\n");
@@ -118,12 +122,27 @@ void pesquisaPessoa(agenda *lista){
 		printf("Digite o nome da pessoa a buscar\n");
 		scanf("%s", nome);
 
-		for(int i = 0; i < lista->quantidade; i++){
-			if(strcmp(nome, lista->lista[i].nome)){
-				printf("Telefone: %s\n", lista->lista[i].tel);
-				printf("Idade: %d\n", lista->lista[i].idade);
+		ordemAlfab(lista);
+
+		while(esq <= dir){
+			meio = (esq + dir)/2;
+			if(strcmp(lista->lista[meio].nome, nome) == 0){
+				pos = meio;
+				break;
+			} else if(lista->lista[meio].nome[0] < nome[0]) {
+				esq = meio + 1;
+			} else {
+				dir = meio - 1;
 			}
 		}
+
+		if(pos == -1){
+			printf("O nome nao consta na lista\n");
+		} else {
+			printf("Idade: %d\n", lista->lista[pos].idade);
+			printf("Telefone: %s\n", lista->lista[pos].tel);
+		}
+
 	}
 
 }
