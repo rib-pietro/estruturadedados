@@ -11,24 +11,17 @@ typedef struct tno tno;
 void inserir(tno *raiz, int dado, tno *novo_no){
 
 	if(raiz == NULL){
-		// printf("E null\n");
 		raiz = novo_no;
 	} else {
 		if(dado < raiz->dado){
-			// printf("%d\n", raiz->dado);
 			if(raiz->esq == NULL){
-				
 				raiz->esq = novo_no;
-
 			} else {
 				inserir(raiz->esq, dado, novo_no);
 			}
 		} else {
-			// printf("%d\n", raiz->dado);
 			if(raiz->dir == NULL){
-
 				raiz->dir = novo_no;
-
 			} else {
 				inserir(raiz->dir, dado, novo_no);
 			}
